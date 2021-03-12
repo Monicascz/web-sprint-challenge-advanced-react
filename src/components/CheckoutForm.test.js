@@ -22,19 +22,45 @@ test("form shows success message on submit with form details", () => {
     const firstname= screen.getByLabelText(/first name:/i)
     userEvent.type(firstname, "Monica")
     //find the lastname, type in it
-
+    const lastname= screen.getByLabelText(/last name:/i)
+    userEvent.type(lastname, "Zwissler")
     //find the address, type in it
+    const address= screen.getByLabelText(/address:/i)
+    userEvent.type(address, "1234 Way Way")
 
     //find the city, type in it
+    const city= screen.getByLabelText(/city:/i)
+    userEvent.type(city, "San Diego")
 
     //find the state, type in it
-
+    const state= screen.getByLabelText(/state:/i)
+    userEvent.type(state, "California")
     //find the zipcode, type in it
+    const zip= screen.getByLabelText(/zip:/i)
+    userEvent.type(zip, "92101")
 
     //find the button, click it
+    const button = screen.getByRole("button")
+    userEvent.click(button)
 
     //find the success message
+    const successMsg = screen.getByTestId("successMessage")
 
-    //Assert: confirm the success message is on the page
+    //Assert: confirm the success message is on the page with the details that I entered.
+    expect(successMsg).toBeInTheDocument();
+    const fnText = screen.queryByText(/monica/i)
+    const lnText = screen.queryByText(/zwissler/i)
+    const addText = screen.queryByText(/1234 way way/i)
+    const cityText = screen.queryByText(/san diego/i)
+    const stateText = screen.queryByText(/california/i)
+    const zipText = screen.queryByText(/92101/i)
+
+    expect(fnText).toBeInTheDocument();
+    expect(lnText).toBeInTheDocument();
+    expect(addText).toBeInTheDocument();
+    expect(cityText).toBeInTheDocument();
+    expect(stateText).toBeInTheDocument();
+    expect(zipText).toBeInTheDocument();
+
 
 });
